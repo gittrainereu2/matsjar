@@ -21,3 +21,14 @@ jobs:
 
       - name: Build JAR with Maven
         run: mvn clean package
+
+        
+      - name: Copy JAR to Aya-GlassFish via SCP
+        uses: appleboy/scp-action@v1
+        with:
+          host: 161.35.74.206
+          username: tln4
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: "target/*.jar"
+          target: "/home/tln4/"
